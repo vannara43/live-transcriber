@@ -1,16 +1,29 @@
 {
-  "name": "ytlivetranscribe",
+  "name": "livetranscribe",
   "version": "1.0.0",
-  "description": "",
+  "description": "A Real-Time Live Transcriber",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron ."
+    "start": "electron .",
+    "dist": "electron-builder"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "whisper": "^0.3.3"
+  },
+  "devDependencies": {
+    "electron": "^34.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.yourname.livetranscriber",
+    "productName": "LiveTranscriber",
+    "win": {
+      "target": "nsis",
+      "icon": "icon.ico"
+    }
   }
 }
