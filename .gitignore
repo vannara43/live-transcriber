@@ -1,0 +1,4 @@
+whisper_env/whisper_env/
+node_modules/
+.DS_Store
+*.log
