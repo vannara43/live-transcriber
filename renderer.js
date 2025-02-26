@@ -1,19 +1,29 @@
-document.getElementById('start-button').addEventListener('click', () => {
-    const url = document.getElementById('youtube-url').value;
-    if (window.electronAPI && window.electronAPI.startTranscription) {
-        window.electronAPI.startTranscription(url);
-    }
+// const { ipcRenderer } = require("electron");
+
+// document.getElementById("start").addEventListener("click", () => {
+//     ipcRenderer.send("start-transcription");
+// });
+
+// document.getElementById("stop").addEventListener("click", () => {
+//     ipcRenderer.send("stop-transcription");
+// });
+
+// ipcRenderer.on("transcription-result", (event, transcription) => {
+//     const log = document.getElementById("transcription-log");
+//     log.innerText += transcription + "\n";
+//     log.scrollTop = log.scrollHeight; // Auto-scroll to the bottom
+// });
+
+document.getElementById("start").addEventListener("click", () => {
+    window.electronAPI.startTranscription();
 });
 
-document.getElementById('stop-button').addEventListener('click', () => {
-    if (window.electronAPI && window.electronAPI.stopTranscription) {
-        window.electronAPI.stopTranscription();
-    }
+document.getElementById("stop").addEventListener("click", () => {
+    window.electronAPI.stopTranscription();
 });
 
-if (window.electronAPI && window.electronAPI.onTranscriptionUpdate) {
-    window.electronAPI.onTranscriptionUpdate((text) => {
-        const transcriptArea = document.getElementById('transcript');
-        transcriptArea.textContent += text + '\n';
-    });
-}
+window.electronAPI.onTranscriptionResult((transcription) => {
+    const log = document.getElementById("transcription-log");
+    log.innerText += transcription + "\n";
+    log.scrollTop = log.scrollHeight; // Auto-scroll
+});

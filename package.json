@@ -4,7 +4,6 @@
   "description": "A Real-Time Live Transcriber",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
     "dist": "electron-builder"
   },
@@ -21,9 +20,28 @@
   "build": {
     "appId": "com.yourname.livetranscriber",
     "productName": "LiveTranscriber",
+    "directories": {
+      "buildResources": "assets"
+    },
+    "files": [
+      "**/*",
+      "!whisper_env/**", 
+      "!dist/**",
+      "preload.js",
+      "transcribe.py",
+      "renderer/",
+      "assets/"
+    ],
     "win": {
       "target": "nsis",
-      "icon": "icon.ico"
+      "icon": "assets/icon.ico"
+    }
+  },
+  "electronWebpack": {
+    "renderer": {
+      "nodeIntegration": false,
+      "contextIsolation": true, 
+      "preload": "./preload.js"
     }
   }
 }

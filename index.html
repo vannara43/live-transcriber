@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';"
+    />
+
     <meta charset="UTF-8" />
     <title>Live Transcriber</title>
     <link rel="stylesheet" href="style.css" />
@@ -18,22 +23,6 @@
       <div id="transcription-log" class="transcription-container"></div>
     </div>
 
-    <script>
-      const { ipcRenderer } = require("electron");
-
-      document.getElementById("start").addEventListener("click", () => {
-        ipcRenderer.send("start-transcription");
-      });
-
-      document.getElementById("stop").addEventListener("click", () => {
-        ipcRenderer.send("stop-transcription");
-      });
-
-      ipcRenderer.on("transcription-result", (event, transcription) => {
-        const log = document.getElementById("transcription-log");
-        log.innerText += transcription + "\n";
-        log.scrollTop = log.scrollHeight; // Auto-scroll to the bottom
-      });
-    </script>
+    <script src="renderer.js"></script>
   </body>
 </html>
